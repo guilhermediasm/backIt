@@ -1,4 +1,4 @@
-package handlers
+package handler
 
 import (
 	"back-It/models"
@@ -32,8 +32,4 @@ func GetTravelPlan(w http.ResponseWriter, r *http.Request) {
 	w.Write(responseJSON)
 }
 
-func CreateTravelPlan(w http.ResponseWriter, r *http.Request) {
-	// Lógica para criar um novo plano de viagem com base nas preferências do usuário
-	// e interações com chatGPT
-	// ...
-}
+
