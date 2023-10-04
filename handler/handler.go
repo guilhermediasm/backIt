@@ -7,3 +7,8 @@ import (
 var (
 	logger *config.Logger
 )
+
+func InitializeHandler() {
+	logger = config.GetLogger("handler")
+	// db = config.GetSQLite()
+}

@@ -1,11 +1,28 @@
 package config
 
-import "github.com/spf13/viper"
+var (
+	// db     *gorm.DB
+	logger *Logger
+)
 
-func InitConfig() {
-	// Configuração de inicialização, leitura de arquivos de configuração, definição de variáveis de ambiente, etc.
-	viper.SetConfigName("config")
-	viper.SetConfigType("yaml")
-	viper.AddConfigPath(".")
-	viper.ReadInConfig()
+/*
+func Init() error {
+	var err error
+
+	db, err = InitializeSQLite()
+
+	if err != nil {
+		return fmt.Errorf("error initializing sqlite: %v", err)
+	}
+
+	return nil
+}
+
+func GetSQLite() *gorm.DB {
+	return db
+} */
+
+func GetLogger(p string) *Logger {
+	logger = NewLogger(p)
+	return logger
 }
