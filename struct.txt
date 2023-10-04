@@ -1,0 +1,27 @@
+IT/
+  ├── main.go                 # Arquivo principal do servidor
+  ├── go.mod                  # Arquivo de módulo Go
+  ├── go.sum                  # Arquivo de somas de verificação de módulo Go
+  ├── config/                 # Configurações do aplicativo
+  │   └── config.go           # Configuração principal do aplicativo
+  ├── handlers/               # Manipuladores de solicitações HTTP
+  │   ├── api.go              # Manipuladores de API RESTful
+  │   └── chat_handler.go     # Manipuladores de chatGPT
+  ├── middleware/             # Middleware HTTP
+  │   └── auth.go             # Middleware de autenticação
+  ├── models/                 # Definições de modelos de dados
+  │   ├── user.go             # Modelo de usuário
+  │   ├── travel.go           # Modelo de viagem
+  │   └── ...
+  ├── routes/                 # Definição de rotas HTTP
+  │   └── routes.go           # Configuração de rotas
+  ├── services/               # Lógica de negócios
+  │   ├── chat_service.go     # Serviço de chatGPT
+  │   ├── travel_service.go   # Serviço de planejamento de viagens
+  │   └── ...
+  ├── utils/                  # Utilitários
+  │   ├── helpers.go          # Funções auxiliares
+  │   └── ...
+  └── tests/                  # Testes unitários e de integração
+      ├── unit/               # Testes unitários
+      └── integration/        # Testes de integração
