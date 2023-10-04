@@ -4,6 +4,8 @@ import (
 	"back-It/models"
 	"encoding/json"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // @BasePath /api/v1
@@ -19,7 +21,7 @@ import (
 // @Failure 500 {object} ErrorResponse
 // @Router /opening [post]
 
-func GetTravelPlan(w http.ResponseWriter, r *http.Request) {
+func GetTravelPlan(ctx *gin.Context) {
 	// Lógica para obter um plano de viagem com base nas solicitações do usuário
 	// e interações com chatGPT
 
