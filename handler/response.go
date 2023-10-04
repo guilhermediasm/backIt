@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/guilhermediasm/back-It/schemas"
+	"github.com/guilhermediasm/backIt/schemas"
 )
 
 func sendError(ctx *gin.Context, code int, msg string) {

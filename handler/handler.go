@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/guilhermediasm/back-It/config"
+	"github.com/guilhermediasm/backIt/config"
 )
 
 var (

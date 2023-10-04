@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	docs "github.com/guilhermediasm/back-It/docs"
-	"github.com/guilhermediasm/back-It/handler"
+	docs "github.com/guilhermediasm/backIt/docs"
+	"github.com/guilhermediasm/backIt/handler"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
