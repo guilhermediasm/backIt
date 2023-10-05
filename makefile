@@ -1,6 +1,6 @@
 .PHONY: default run build test docs clean
 
-APP_NAME=back-It
+APP_NAME=backIt
 
 default: run-with-docs
 

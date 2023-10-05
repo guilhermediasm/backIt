@@ -13,7 +13,7 @@ import (
 // @Tags Openings
 // @Accept json
 // @Produce json
-// @Param request body CreateOpeningRequest true "Request body"
+// @Param request body CreateTravelPlanRequest true "Request body"
 // @Success 200 {object} CreateOpeningResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
@@ -22,7 +22,7 @@ import (
 func CreateTravelPlan(ctx *gin.Context) {
 	// Lógica para criar um novo plano de viagem com base nas preferências do usuário
 	// e interações com chatGPT
-	request := CreateOpeningRequest{}
+	request := CreateTravelPlanRequest{}
 
 	ctx.BindJSON(&request)
 

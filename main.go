@@ -1,19 +1,20 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	"github.com/gorilla/mux"
-	"back-It/routes"
+	"github.com/guilhermediasm/backIt/config"
+	"github.com/guilhermediasm/backIt/router"
+)
+
+var (
+	logger config.Logger
 )
 
 func main() {
-	// Crie um roteador
-	router := mux.NewRouter()
-
-	// Configure as rotas
-	routes.SetupRoutes(router)
-
-	// Inicie o servidor na porta 8080
-	log.Fatal(http.ListenAndServe(":8080", router))
+	logger = *config.GetLogger("main")
+	/* 	err := config.Init()
+	   	if err != nil {
+	   		logger.Errorf("config initialization error: %v", err)
+	   		return
+	   	} */
+	router.Initialize()
 }

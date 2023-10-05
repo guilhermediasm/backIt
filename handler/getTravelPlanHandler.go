@@ -1,10 +1,11 @@
 package handler
 
 import (
-	"back-It/models"
+	"context"
 	"encoding/json"
-	"net/http"
+	"log"
 
+	"github.com/ayush6624/go-chatgpt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +16,7 @@ import (
 // @Tags Openings
 // @Accept json
 // @Produce json
-// @Param request body CreateOpeningRequest true "Request body"
+// @Param request body CreateTravelPlanRequest true "Request body"
 // @Success 200 {object} CreateOpeningResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse
@@ -25,35 +26,37 @@ func GetTravelPlan(ctx *gin.Context) {
 	// Lógica para obter um plano de viagem com base nas solicitações do usuário
 	// e interações com chatGPT
 
-	request := CreateOpeningRequest{}
-
-	ctx.BindJSON(&request)
-
-	if err := request.Validate(); err != nil {
-		logger.Errorf("validation error: %v", err.Error())
-		sendError(ctx, http.StatusBadRequest, err.Error())
-		return
-	}
-
-	travel := models.TravelPlan{
-		ID:          1,
-		Destination: "Paris, França",
-		StartDate:   "2023-10-15",
-		EndDate:     "2023-10-22",
-		// Preencha outros campos do plano de viagem conforme necessário
-	}
-
-	// Converte o plano de viagem em JSON
-	responseJSON, err := json.Marshal(travel)
+	// key := os.Getenv("OPENAI_KEY")
+	key := "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"
+	c, err := chatgpt.NewClient(key)
 	if err != nil {
-		http.Error(w, "Erro ao serializar os dados", http.StatusInternalServerError)
-		return
+		log.Fatal(err)
 	}
 
-	// Define o cabeçalho Content-Type para JSON
-	w.Header().Set("Content-Type", "application/json")
+	ctxChat := context.Background()
+	res, err := c.SimpleSend(ctxChat, "Hey, Explain GoLang to me in 2 sentences.")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	// Escreve a resposta JSON
-	w.WriteHeader(http.StatusOK)
-	w.Write(responseJSON)
+	a, _ := json.MarshalIndent(res, "", "  ")
+	log.Println(string(a))
+
+	res, err = c.Send(ctxChat, &chatgpt.ChatCompletionRequest{
+		Model: chatgpt.GPT4,
+		Messages: []chatgpt.ChatMessage{
+			{
+				Role:    chatgpt.ChatGPTModelRoleSystem,
+				Content: "Hey, Explain GoLang to me in 2 sentences.",
+			},
+		},
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	a, _ = json.MarshalIndent(res, "", "  ")
+	log.Println(string(a))
+
+	sendSuccess(ctx, "travelplan-created", string(a))
 }

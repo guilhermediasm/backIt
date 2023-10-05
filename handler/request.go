@@ -6,52 +6,28 @@ func errParamIsRequired(name, typ string) error {
 	return fmt.Errorf("param: %s (type: %s) is required", name, typ)
 }
 
-type CreateOpeningRequest struct {
-	Role     string `json:"role"`
-	Company  string `json:"company"`
-	Location string `json:"location"`
-	Remote   *bool  `json:"remote" `
-	Link     string `json:"link"`
-	Salary   int64  `json:"salary"`
+type CreateTravelPlanRequest struct {
+	Location    string `json:"location"`
+	Destination string `json:"destination"`
+	StartDate   string `json:"startDate"`
+	EndDate     string `json:"endDate"`
 }
 
-func (r *CreateOpeningRequest) Validate() error {
-	if r.Role == "" && r.Company == "" && r.Location == "" && r.Remote == nil && r.Link == "" && r.Salary <= 0 {
+func (r *CreateTravelPlanRequest) Validate() error {
+	if r.Destination == "" && r.StartDate == "" && r.Location == "" && r.EndDate == "" {
 		return fmt.Errorf("request body is empty or malformed")
 	}
-	if r.Role == "" {
-		return errParamIsRequired("role", "string")
+	if r.Destination == "" {
+		return errParamIsRequired("destination", "string")
 	}
-	if r.Company == "" {
-		return errParamIsRequired("company", "string")
+	if r.StartDate == "" {
+		return errParamIsRequired("startDate", "string")
 	}
 	if r.Location == "" {
 		return errParamIsRequired("location", "string")
 	}
-	if r.Remote == nil {
-		return errParamIsRequired("remote", "bool")
-	}
-	if r.Link == "" {
-		return errParamIsRequired("link", "string")
-	}
-	if r.Salary <= 0 {
-		return errParamIsRequired("salary", "int64")
+	if r.EndDate == "" {
+		return errParamIsRequired("endDate", "string")
 	}
 	return nil
-}
-
-type UpdateOpeningRequest struct {
-	Role     string `json:"role"`
-	Company  string `json:"company"`
-	Location string `json:"location"`
-	Remote   *bool  `json:"remote" `
-	Link     string `json:"link"`
-	Salary   int64  `json:"salary"`
-}
-
-func (r *UpdateOpeningRequest) Validate() error {
-	if r.Role != "" || r.Company != "" || r.Location != "" || r.Remote != nil || r.Link != "" || r.Salary > 0 {
-		return nil
-	}
-	return fmt.Errorf("at least one valid field must be provided")
 }

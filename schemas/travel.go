@@ -6,14 +6,12 @@ import (
 	"gorm.io/gorm"
 )
 
-type Opening struct {
+type Travel struct {
 	gorm.Model
-	Role     string
-	Company  string
-	Location string
-	Remote   bool
-	Link     string
-	Salary   int64
+
+	Destination string
+	StartDate   string
+	EndDate     string
 }
 
 type OpeningResponse struct {
